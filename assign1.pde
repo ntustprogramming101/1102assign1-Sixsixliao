@@ -7,7 +7,7 @@ PImage soilImg;
 
 //conjecture
 float centerX;
-float laserX,laserY;
+float laserX,laserXX,laserEnd,laserY;
 int soldierX,soldierY;
 int robotX,robotY;
 int laserSpeed;
@@ -25,8 +25,11 @@ void setup() {
   //groundhog
   centerX = width/2-40;
   
-  //laserspeed
+  //laser
   laserSpeed =2;
+  laserX = robotX + 25;
+  laserXX = robotX+25;
+  laserEnd = laserX - 80*2-25; 
  
  //loadimg
   bgImg = loadImage("img/bg.jpg");
@@ -71,10 +74,17 @@ void draw() {
   stroke(255,0,0);
   strokeWeight(10);
   //
-  line(laserX,robotY+37,laserX-40,robotY+37);
+  line(laserX,robotY+37,laserXX,robotY+37);
   laserX -= laserSpeed;
-  if(laserX-40 <= robotX-160){
-  laserX = robotX+25;
+  
+  //shoot
+  if(laserX <= robotX-25){ 
+  laserXX -= laserSpeed;
+  }
+  //end
+  if(laserX <= laserEnd){
+  laserX = laserX + 80*2+25;
+  laserXX = robotX+25;
   }
   
  //soldier walk
